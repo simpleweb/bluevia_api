@@ -1,0 +1,3 @@
+module BlueviaApi
+  VERSION = "0.0.1"
+end
