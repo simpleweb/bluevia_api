@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = BlueviaApi::VERSION
 
   gem.add_dependency "oauth", "~> 0.4.5"
+  gem.add_dependency "log4r"
   gem.add_development_dependency "rake", "~> 0.9.2"
   gem.add_development_dependency "webmock"
 end

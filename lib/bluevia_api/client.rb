@@ -1,4 +1,5 @@
 require 'oauth'
+require 'log4r'
 
 module BlueviaApi
   class Client
@@ -9,6 +10,11 @@ module BlueviaApi
     def initialize(options = {})
       @access_token = options[:access_token]
       @access_token_secret = options[:access_token_secret]
+    end
+
+    def logger
+      @logger ||= Log4r::Logger.new 'bluevia api'
+      @logger.outputters = Log4r::Outputter.stdout
     end
 
     # OAuth access token

@@ -10,7 +10,7 @@ module BlueviaApi
           :originAddress => { :alias => @access_token }
         }
       }.to_json, 'Content-Type' => 'application/json')
-      puts response.body
+      logger.info response.body
     end
   end
 end
