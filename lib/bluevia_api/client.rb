@@ -13,8 +13,7 @@ module BlueviaApi
     end
 
     def logger
-      @logger ||= Log4r::Logger.new 'bluevia api'
-      @logger.outputters = Log4r::Outputter.stdout
+      @logger ||= create_logger
     end
 
     # OAuth access token
@@ -23,6 +22,13 @@ module BlueviaApi
     end
 
     private
+
+    def create_logger
+      logger ||= Log4r::Logger.new 'bluevia api'
+      logger.outputters = Log4r::Outputter.stdout
+      logger.level = Log4r::INFO
+      logger
+    end
 
     # Get an OAuth consumer instance.
     def consumer

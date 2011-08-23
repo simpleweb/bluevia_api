@@ -11,6 +11,7 @@ module BlueviaApi
         }
       }.to_json, 'Content-Type' => 'application/json')
       logger.info response.body
+      logger.info response.code
     end
   end
 end
