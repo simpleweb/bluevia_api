@@ -12,15 +12,17 @@ module BlueviaApi
     end
 
     # OAuth access token
-    def access_token
-      @_access_token ||= OAuth::AccessToken.new(@consumer, @access_token, @access_token_secret)
+    def token
+      @_access_token ||= OAuth::AccessToken.new(consumer, @access_token, @access_token_secret)
     end
 
     private
 
     # Get an OAuth consumer instance.
     def consumer
-      @consumer ||= OAuth::Consumer.new(Bluevia.token, Bluevia.secret, {:site => 'https://api.bluevia.com/services/REST'})
+      @consumer ||= OAuth::Consumer.new(BlueviaApi.token, BlueviaApi.secret, {
+        :site => 'https://api.bluevia.com'
+      })
     end
   end
 end
