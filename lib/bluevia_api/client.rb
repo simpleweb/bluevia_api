@@ -1,3 +1,5 @@
+require 'oauth'
+
 module BlueviaApi
   class Client
     include Sms
