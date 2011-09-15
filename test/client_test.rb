@@ -24,6 +24,6 @@ class ClientTest < Test::Unit::TestCase
       :access_token_secret => 'secret'
     )
 
-    assert_equal true, client.send_sms('00000000000', 'Hello, world!')
+    assert_equal 201, client.send_sms('00000000000', 'Hello, world!').code.to_i
   end
 end
