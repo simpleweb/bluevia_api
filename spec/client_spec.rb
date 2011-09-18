@@ -1,17 +1,17 @@
-require File.expand_path('../test_helper', __FILE__)
+require 'helper'
 
-class ClientTest < Test::Unit::TestCase
-  def test_creating_client_credentials
+describe BlueviaApi::Client do
+  it "creates assigns the clients credentials" do
     client = BlueviaApi::Client.new(
       :access_token => 'access_token',
       :access_token_secret => 'secret'
     )
 
-    assert_equal 'access_token', client.access_token
-    assert_equal 'secret', client.access_token_secret
+    client.access_token.should == 'access_token'
+    client.access_token_secret.should == 'secret'
   end
 
-  def test_sending_sms
+  it "sends sms" do
     stub_request(:post, "https://api.bluevia.com/services/REST/SMS/outbound/requests?version=v1").
       with(:body => /smsText/, :headers => {
         'Accept' => '*/*',
@@ -24,6 +24,6 @@ class ClientTest < Test::Unit::TestCase
       :access_token_secret => 'secret'
     )
 
-    assert_equal 201, client.send_sms('00000000000', 'Hello, world!').code.to_i
+    client.send_sms('00000000000', 'Hello, world!').code.to_i.should == 201
   end
 end
