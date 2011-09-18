@@ -13,7 +13,7 @@ module BlueviaApi
     end
 
     def receive_sms
-      JSON.parse(token.get('/services/REST/SMS/inbound/5480605/messages?alt=json&version=v1').body)
+      JSON.parse(token.get('/services/REST/SMS/inbound/445480605/messages?alt=json&version=v1').body)
     end
   end
 end

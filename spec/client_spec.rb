@@ -27,7 +27,7 @@ describe BlueviaApi::Client do
 
   describe "receiving sms" do
     before do
-      stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/5480605/messages?version=v1&alt=json").
+      stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/445480605/messages?version=v1&alt=json").
         to_return(:status => 200, :body => fixture('sms_polling_success.json'))
     end
 
