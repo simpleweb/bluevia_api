@@ -1,13 +1,16 @@
 require 'helper'
 
 describe BlueviaApi::Client do
-  it "creates assigns the clients credentials" do
-    client = BlueviaApi::Client.new(
-      :access_token => 'access_token',
+  let(:client) do 
+    BlueviaApi.new(
+      :access_token => 'token',
       :access_token_secret => 'secret'
     )
+  end
 
-    client.access_token.should == 'access_token'
+
+  it "creates assigns the clients credentials" do
+    client.access_token.should == 'token'
     client.access_token_secret.should == 'secret'
   end
 
@@ -19,11 +22,18 @@ describe BlueviaApi::Client do
         'User-Agent' => 'OAuth gem v0.4.5'
       }).to_return(:status => 201)
 
-    client = BlueviaApi.new(
-      :access_token => 'token',
-      :access_token_secret => 'secret'
-    )
-
     client.send_sms('00000000000', 'Hello, world!').code.to_i.should == 201
+  end
+
+  describe "receiving sms" do
+    before do
+      stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/5480605/messages?version=v1&alt=json").
+        to_return(:status => 200, :body => fixture('sms_polling_success.json'))
+    end
+
+    it "receives sms" do
+      messages = client.receive_sms
+      messages.should_not be_empty
+    end
   end
 end
