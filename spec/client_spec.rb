@@ -51,4 +51,17 @@ describe BlueviaApi::Client do
       received.length.should == 0
     end
   end
+
+  describe "sandbox mode" do
+    before do
+      @stub = stub_request(:get, "https://api.bluevia.com/services/REST/SMS_Sandbox/inbound/445480605/messages?version=v1&alt=json").
+        to_return(:status => 204)
+    end
+
+    it "requests sandbox urls when in sandbox mode" do
+      BlueviaApi.sandbox = true
+      client.receive_sms
+      @stub.should have_been_requested
+    end
+  end
 end

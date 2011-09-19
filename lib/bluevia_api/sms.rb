@@ -3,7 +3,7 @@ require 'json'
 module BlueviaApi
   module Sms
     def send_sms(number, message)
-      token.post('/services/REST/SMS/outbound/requests?version=v1', {
+      token.post("/services/REST/SMS#{"_Sandbox" if BlueviaApi.sandbox}/outbound/requests?version=v1", {
         :smsText => {
           :address => { :phoneNumber => number },
           :message => message,
@@ -13,7 +13,7 @@ module BlueviaApi
     end
 
     def receive_sms
-      response = token.get('/services/REST/SMS/inbound/445480605/messages?alt=json&version=v1')
+      response = token.get("/services/REST/SMS#{"_Sandbox" if BlueviaApi.sandbox}/inbound/445480605/messages?alt=json&version=v1")
 
       case response.code.to_i
       when 200

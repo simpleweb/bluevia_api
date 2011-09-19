@@ -5,7 +5,7 @@ module BlueviaApi
   autoload :Sms, 'bluevia_api/sms'
 
   class << self
-    attr_accessor :token, :secret
+    attr_accessor :token, :secret, :sandbox
 
     def new(*args)
       Client.new(*args)
