@@ -26,8 +26,13 @@ module BlueviaApi
     private
 
     def parse_messages(json_body)
-      (JSON.parse(json_body)['receivedSMS']['receivedSMS']).map do |msg|
-        ReceivedSMS.new(msg)
+      body = JSON.parse(json_body)['receivedSMS']['receivedSMS']
+      if body.kind_of?(Array)
+        body.map do |msg|
+          ReceivedSMS.new(msg)
+        end
+      else
+        [ReceivedSMS.new(body)]
       end
     end
 
