@@ -26,12 +26,20 @@ describe BlueviaApi::Client do
   end
 
   describe "receiving sms" do
-    before do
+    it "receives multiple sms" do
       stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/445480605/messages?version=v1&alt=json").
         to_return(:status => 200, :body => fixture('sms_polling_success.json'))
+
+      received = client.receive_sms
+      received.should_not be_empty
+      received.length.should == 1
+      received.first.message.should == "facejam This is a text message"
     end
 
-    it "receives sms" do
+    it "receives single sms" do
+      stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/445480605/messages?version=v1&alt=json").
+        to_return(:status => 200, :body => fixture('sms_polling_success_single.json'))
+
       received = client.receive_sms
       received.should_not be_empty
       received.length.should == 1
@@ -45,7 +53,7 @@ describe BlueviaApi::Client do
         to_return(:status => 204)
     end
 
-    it "receives sms" do
+    it "doesn't receive sms" do
       received = client.receive_sms
       received.should be_empty
       received.length.should == 0

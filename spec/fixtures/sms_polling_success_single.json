@@ -1,0 +1,8 @@
+{"receivedSMS":{
+  "receivedSMS":{
+    "message":"facejam This is a text message",
+    "originAddress":{"phoneNumber":"524794786537"},
+    "destinationAddress":{"phoneNumber":"524040"},
+    "dateTime":"2010-10-22T15:48:45.662Z"
+  }
+}}
