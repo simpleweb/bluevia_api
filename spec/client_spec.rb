@@ -79,7 +79,7 @@ describe BlueviaApi::Client do
 
   describe "subscribing to SMS" do
     before do
-      @stub = stub_request(:post, "https://api.bluevia.com/services/REST/SMS/inbound/subscriptions?version=v1").
+      @stub = stub_request(:post, "https://api.bluevia.com/services/REST/SMS/inbound/subscriptions?alt=json&version=v1").
         to_return(:status => 201, :headers => { :location => "https://api.bluevia.com/services/REST/SMS/inbound/subscriptions/c7ke93abc4_2" })
     end
 
