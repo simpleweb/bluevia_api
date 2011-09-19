@@ -23,6 +23,21 @@ module BlueviaApi
       end
     end
 
+    def subscribe_to_sms(options = {})
+      token.post("/services/REST/SMS#{"_Sandbox" if BlueviaApi.sandbox}/inbound/subscriptions?version=v1", {
+        :smsNotification => {
+          :reference => {
+            :correlator => options[:correlator],
+            :endpoint => options[:endpoint]
+          },
+          :destinationAddress => {
+            :phoneNumber => "445480605"
+          },
+          :criteria => "facejam"
+        }
+      })
+    end
+
     private
 
     def parse_messages(json_body)

@@ -66,9 +66,25 @@ describe BlueviaApi::Client do
         to_return(:status => 204)
     end
 
+    after do
+      BlueviaApi.sandbox = false
+    end
+
     it "requests sandbox urls when in sandbox mode" do
       BlueviaApi.sandbox = true
       client.receive_sms
+      @stub.should have_been_requested
+    end
+  end
+
+  describe "subscribing to SMS" do
+    before do
+      @stub = stub_request(:post, "https://api.bluevia.com/services/REST/SMS/inbound/subscriptions?version=v1").
+        to_return(:status => 201, :headers => { :location => "https://api.bluevia.com/services/REST/SMS/inbound/subscriptions/c7ke93abc4_2" })
+    end
+
+    it "can subscribe to notifications" do
+      client.subscribe_to_sms(:correlator => "user:1", :endpoint => "https://example.com/messages")
       @stub.should have_been_requested
     end
   end
