@@ -24,7 +24,7 @@ module BlueviaApi
     end
 
     def subscribe_to_sms(options = {})
-      token.post("/services/REST/SMS#{"_Sandbox" if BlueviaApi.sandbox}/inbound/subscriptions?version=v1", {
+      token.post("/services/REST/SMS#{"_Sandbox" if BlueviaApi.sandbox}/inbound/subscriptions?version=v1&alt=json", {
         :smsNotification => {
           :reference => {
             :correlator => options[:correlator],
@@ -35,7 +35,7 @@ module BlueviaApi
           },
           :criteria => "facejam"
         }
-      })
+      }, 'Content-Type' => 'application/json')
     end
 
     private
