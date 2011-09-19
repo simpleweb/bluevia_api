@@ -1,7 +1,7 @@
 require 'helper'
 
 describe BlueviaApi::Client do
-  let(:client) do 
+  let(:client) do
     BlueviaApi.new(
       :access_token => 'token',
       :access_token_secret => 'secret'
