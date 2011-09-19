@@ -32,8 +32,23 @@ describe BlueviaApi::Client do
     end
 
     it "receives sms" do
-      messages = client.receive_sms
-      messages.should_not be_empty
+      received = client.receive_sms
+      received.should_not be_empty
+      received.length.should == 1
+      received.first.message.should == "facejam This is a text message"
+    end
+  end
+
+  describe "no sms to receive" do
+     before do
+      stub_request(:get, "https://api.bluevia.com/services/REST/SMS/inbound/445480605/messages?version=v1&alt=json").
+        to_return(:status => 204)
+    end
+
+    it "receives sms" do
+      received = client.receive_sms
+      received.should be_empty
+      received.length.should == 0
     end
   end
 end
