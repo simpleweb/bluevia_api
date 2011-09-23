@@ -35,7 +35,7 @@ module BlueviaApi
           },
           :criteria => "facejam"
         }
-      }, 'Content-Type' => 'application/json')
+      }.to_json, 'Content-Type' => 'application/json')
     end
 
     private
