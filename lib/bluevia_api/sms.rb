@@ -33,7 +33,7 @@ module BlueviaApi
           :destinationAddress => {
             :phoneNumber => "445480605"
           },
-          :criteria => options[:keyword]
+          :criteria => BlueviaApi.keyword
         }
       }.to_json, 'Content-Type' => 'application/json')
     end

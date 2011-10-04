@@ -6,6 +6,11 @@ module BlueviaApi
 
   class << self
     attr_accessor :token, :secret, :sandbox
+    attr_writer :keyword
+
+    def keyword
+      "#{"SAND" if @sandbox}#{@keyword}"
+    end
 
     def new(*args)
       Client.new(*args)
