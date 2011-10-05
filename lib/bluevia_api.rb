@@ -7,6 +7,9 @@ module BlueviaApi
 
   extend Configuration
 
+  # Public: Delegate to BlueviaApi::Client for creating a new instance.
+  #
+  # Returns an Instance of BlueviaApi::Client
   def self.new(*args)
     Client.new(*args)
   end
